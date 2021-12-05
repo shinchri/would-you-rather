@@ -1,28 +1,61 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { setAuthedUser } from '../actions/authedUser'
+import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
+
+    state = {
+        userId: '',
+        toHome: false
+    }
+
+    handleChange = (id) => {
+        this.setState(() => ({
+            userId: id
+        }))
+    }
+
+    handleLogin = (e) => {
+        e.preventDefault()
+
+        const { userId } = this.state
+
+        this.props.dispatch(setAuthedUser(userId))
+
+        this.setState(() => ({
+            toHome: true
+        }))
+    }
+
     render () {
-        const { authedUser, users} = this.props
+        const { toHome } = this.state
+        const { users} = this.props
+
+        if (toHome === true) {
+            console.log('Redirect to home.')
+            return <Redirect to='/' />
+        }
 
         return (
             <div>
-                <h1>Hello</h1>
-                {<h1>{authedUser}</h1>}
-                <ul>
-                    {users.map((user) => (
-                        <li key={user.id}>{user.name}</li>
-                    ))}
-                </ul>
+                <form onSubmit={this.handleLogin}>
+                    <span >Sign in</span>
+                    <select onChange={(e) => this.handleChange(e.target.value)}>
+                        <option>Choose User</option>
+                        {users.map((user) => (
+                        <option key={user.id} value={user.id}>{user.name}</option>
+                        ))}
+                    </select>
+                    <button type='submit'>Sign in</button>
+                </form>
             </div>
         )
     }
 }
 
-function mapStateToProps ({authedUser, users}) {
+function mapStateToProps ({users}) {
     return {
-        authedUser,
         users: Object.values(users)
     }
 }
