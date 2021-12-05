@@ -8,7 +8,7 @@ class Home extends Component {
         console.log(authedUser)
         if (authedUser === null) {
             console.log('To login page');
-            <Redirect to='/login' />
+            return <Redirect to='/login' />
         }
         
         return (
