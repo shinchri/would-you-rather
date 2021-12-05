@@ -12,33 +12,6 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
 
-  PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props =>
-        this.props.authedUser !== null ? (
-          <>
-            {props.match.path === "/questions/:question_id" &&
-            !Object.keys(this.props.questions).includes(
-              props.match.params.question_id
-            ) ? (
-              <Redirect to="/404" />
-            ) : (
-              <Component {...props} />
-            )}
-          </>
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location }
-            }}
-          />
-        )
-      }
-    />
-  );
-
   render() {
 
     return (
@@ -48,11 +21,8 @@ class App extends Component {
             {this.props.loading === true
             ? null
             : <div>
-                <Switch>
-                  <Route path='/login' component={Login} />
-                  <this.PrivateRoute exact path='/' component={Home} />
-                  {/* <Route path='/' exact component={Home} /> */}
-                </Switch>
+                <Route path='/login' component={Login} />
+                <Route path='/' exact component={Home} />
               </div>
             }
           </div>

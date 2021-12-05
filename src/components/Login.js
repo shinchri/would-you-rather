@@ -41,8 +41,8 @@ class Login extends Component {
             <div>
                 <form onSubmit={this.handleLogin}>
                     <span >Sign in</span>
-                    <select onChange={(e) => this.handleChange(e.target.value)}>
-                        <option>Choose User</option>
+                    <select onChange={(e) => this.handleChange(e.target.value)} required>
+                        <option value="" disabled selected>Select your option</option>
                         {users.map((user) => (
                         <option key={user.id} value={user.id}>{user.name}</option>
                         ))}
