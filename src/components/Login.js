@@ -5,15 +5,14 @@ import { connect } from 'react-redux'
 class Login extends Component {
     render () {
         const { authedUser, users} = this.props
-        console.log(JSON.stringify(users))
 
         return (
             <div>
                 <h1>Hello</h1>
                 {<h1>{authedUser}</h1>}
                 <ul>
-                    {Object.entries(users).forEach(([key, value]) => (
-                        <li key={key}>{value}</li>
+                    {users.map((user) => (
+                        <li key={user.id}>{user.name}</li>
                     ))}
                 </ul>
             </div>
@@ -24,7 +23,7 @@ class Login extends Component {
 function mapStateToProps ({authedUser, users}) {
     return {
         authedUser,
-        users
+        users: Object.values(users)
     }
 }
 

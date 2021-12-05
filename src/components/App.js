@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {handleInitialData } from '../actions/shared'
 import Login from './Login'
+import Nav from './Nav'
+import Home from './Home'
+import Fragment from 'render-fragment'
 
 class App extends Component {
   componentDidMount() {
@@ -20,7 +23,11 @@ class App extends Component {
         : <div>
             {authedUser === undefined
             ? <Login />
-            : <h1>Starter Code!</h1>
+            : <Fragment>
+                <Nav />
+                <Home />
+              </Fragment>            
+            
             }
           </div>
         }
