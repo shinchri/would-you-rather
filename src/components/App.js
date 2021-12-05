@@ -5,7 +5,7 @@ import Login from './Login'
 import Nav from './Nav'
 import Home from './Home'
 import Fragment from 'render-fragment'
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Route} from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +22,10 @@ class App extends Component {
             ? null
             : <div>
                 <Route path='/login' component={Login} />
-                <Route path='/' exact component={Home} />
+                <Route path='/' exact >
+                  <Nav />
+                  <Home />
+                </Route>
               </div>
             }
           </div>

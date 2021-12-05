@@ -42,7 +42,7 @@ class Login extends Component {
                 <form onSubmit={this.handleLogin}>
                     <span >Sign in</span>
                     <select onChange={(e) => this.handleChange(e.target.value)} required>
-                        <option value="" disabled selected>Select your option</option>
+                        <option value="" defaultValue={{label: "Select Your Option", value: 0}}>Select your option</option>
                         {users.map((user) => (
                         <option key={user.id} value={user.id}>{user.name}</option>
                         ))}
