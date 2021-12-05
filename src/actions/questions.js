@@ -48,9 +48,9 @@ export function handleAddUserAnswerToQuestion(questionId, answer) {
     return (dispatch, getState) => {
         const { authedUser } = getState()
         return _saveQuestionAnswer({
-            questionId,
-            answer,
-            authedUser
+            authedUser,
+            qid: questionId,
+            answer
         }).then(() => {
             dispatch(addUserAnswerToQuestion(authedUser, questionId, answer))
             dispatch(addUserAnswer(authedUser, questionId, answer))
