@@ -13,7 +13,6 @@ class App extends Component {
   }
 
   render() {
-    const { authedUser} = this.props
 
     return (
       <Router>
@@ -22,10 +21,8 @@ class App extends Component {
             {this.props.loading === true
             ? null
             : <div>
-                {authedUser === undefined
-                ? <Route path='/login' component={Login} />
-                : <Route path='/' exact component={Home} />
-                }
+                <Route path='/login' component={Login} />
+                <Route path='/' exact component={Home} />
               </div>
             }
           </div>
