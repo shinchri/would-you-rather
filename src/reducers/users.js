@@ -1,5 +1,5 @@
 import {
-    RECEIVE_USERS
+    RECEIVE_USERS, ADD_USER_QUESTION, ADD_USER_ANSWER
 } from '../actions/users'
 
 export default function users(state={}, action) {
@@ -8,6 +8,25 @@ export default function users(state={}, action) {
             return {
                 ...state,
                 ...action.users
+            }
+        case ADD_USER_QUESTION:
+            return {
+                ...state,
+                [action.question.author]: {
+                    ...state[action.question.author],
+                    questions: [...state[action.question.author].questions, action.question.id]
+                }
+            }
+        case ADD_USER_ANSWER:
+            return {
+                ...state,
+                [action.authedUser]: {
+                    ...state[action.authedUser],
+                    answers: {
+                        ...state[action.authedUser].answers,
+                        [action.questionId]: action.answer
+                    }
+                }
             }
         default:
             return state

@@ -6,6 +6,7 @@ import Nav from './Nav'
 import Home from './Home'
 import Fragment from 'render-fragment'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
+import PollDetail from './PollDetail'
 
 class App extends Component {
   componentDidMount() {
@@ -25,6 +26,10 @@ class App extends Component {
                 <Route path='/' exact >
                   <Nav />
                   <Home />
+                </Route>
+                <Route path='/questions/:question_id' >
+                  <Nav />
+                  <PollDetail />
                 </Route>
               </div>
             }

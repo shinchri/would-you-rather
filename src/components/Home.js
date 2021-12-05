@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import PollList from './PollList'
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 class Home extends Component {
     render() {
@@ -11,18 +14,41 @@ class Home extends Component {
         }
         
         return (
-            <div>
-                Home
-            </div>
+            <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example">
+                <Tab eventKey="unanswered" title="Unanswered">
+                    <PollList
+                    title="Unanswered Questions"
+                    questionIds={this.props.unanswered}
+                    />
+                </Tab>
+                <Tab eventKey="answered" title="Answered">
+                    <PollList
+                    title="Answered Questions"
+                    questionIds={this.props.answered}
+                    />
+                </Tab>
+            </Tabs>
         )
     }
 }
 
 function mapStateToProps({authedUser, users, questions}) {
+    let user, answered, unanswered;
+
+    if (authedUser !== null) {
+        user = users[authedUser]
+        answered = Object.keys(user.answers)
+            .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+        unanswered = Object.keys(questions)
+            .filter(id => !answered.includes(id))
+            .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    }
+    
     return {
         authedUser,
-        users: Object.values(users),
-        questions: Object.values(questions)
+        user,
+        answered,
+        unanswered
     }
 }
 
