@@ -2,8 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom'
 import { logout } from '../actions/authedUser'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
 
-class Nav extends React.Component {
+class Navs extends React.Component {
 
     handleLogout = (e) => {
         
@@ -19,30 +22,32 @@ class Nav extends React.Component {
             return <Redirect to='/' />
         }
         return (
-            <nav className='nav'>
-                <ul>
-                    <li>
-                        <NavLink to="/home" activeClassName="active">
+            <Navbar collapseOnSelect expand="lg" variant="light" style={{padding: '20px'}}>
+                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <span class='user-greeting'>Hello, {user[0].name}</span>
+                
+                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Collapse id="navbarScroll">
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                        <NavLink to="/home" activeClassName="active" className="nav-item">
                             Home
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/question/new" activeClassName="active">
+                        <NavLink to="/question/new" activeClassName="active" className="nav-item">
                             New Question
                         </NavLink>
-                        
-                    </li>
-                    <li>
-                        Leaderboard
-                    </li>
-                    <li>
-                        {user[0].name}
-                    </li>
-                    <li>
-                        <button onClick={this.handleLogout}>Logout</button>
-                    </li>
-                </ul>
-            </nav>
+                        <NavLink to="/question/new" activeClassName="active" className="nav-item">
+                            Leader Board
+                        </NavLink>
+                    </Nav>
+                    
+                </Navbar.Collapse>
+                <Button onClick={this.handleLogout} variant="outline-dark">Logout</Button>
+                
+            </Navbar>
         )
     }
 }
@@ -55,5 +60,5 @@ function mapStateToProps({authedUser, users}) {
     }
 }
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps)(Navs)
 

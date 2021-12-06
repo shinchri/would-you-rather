@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {handleInitialData } from '../actions/shared'
 import Login from './Login'
-import Nav from './Nav'
+import Navs from './Nav'
 import Home from './Home'
 import Fragment from 'render-fragment'
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
@@ -26,15 +26,15 @@ class App extends Component {
             : <div>
                 <Switch>
                   <Route path='/home' exact >
-                    <Nav />
+                    <Navs />
                     <Home />
                   </Route>
                   <Route path='/question/new'>
-                    <Nav />
+                    <Navs />
                     <NewQuestion />
                   </Route>
                   <Route path='/questions/:question_id' >
-                    <Nav />
+                    <Navs />
                     <PollDetail />
                   </Route>
                   <Redirect exact from='/' to='/home' />
