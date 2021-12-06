@@ -27,7 +27,7 @@ class PollDetail extends Component {
         })
     }
 
-    checkSelectedOPtion() {
+    checkSelectedOption() {
         if (
           this.props.hasAnswered &&
           this.props.question.optionOne.votes.includes(this.props.authedUser)
@@ -42,25 +42,27 @@ class PollDetail extends Component {
       }
     
       componentDidMount() {
-        this.checkSelectedOPtion();
+        this.checkSelectedOption();
       }
     
       componentDidUpdate(prevProps) {
         if (this.props.hasAnswered !== prevProps.hasAnswered) {
-          this.checkSelectedOPtion();
+          this.checkSelectedOption();
         }
       }
 
 
 
     render() {
-        console.log("Has Answered: ", this.props.hasAnswerd)
         return (
             <div>
                 <h2 className="text-center">Poll Details</h2>
                 <div className="add-question-container border">
+                    
                     <Poll questionId={this.props.questionId} />
-                    {!this.props.hasAnswered && (
+                    {!this.props.hasAnswerd
+                    ?   (
+                    
                         <form onSubmit={this.handleSubmit} className="p-20">
                             <div className="custom-control custom-radio">
                                 <input
@@ -101,15 +103,10 @@ class PollDetail extends Component {
                                     </button>
                                 </div>
                             )}
-                        </form>
-                    )}
-                    
-                    {this.props.hasAnswered && (
-                        
-                        <div className="">
-                            <h3>hello</h3>
+                        </form>)
+                    :   (<div className="">
                             <div className="progress">
-                                <h5>Option 1: {this.props.totalVotesOpt1} Voted</h5>
+                                <h6>Option 1: {this.props.totalVotesOpt1} Voted</h6>
                                 <div
                                 className="progress-bar"
                                 role="progressbar"
@@ -117,7 +114,7 @@ class PollDetail extends Component {
                                 >
                                 {this.props.percentage1}%
                                 </div>
-                                <h5>Option 2: {this.props.totalVotesOpt2} Voted</h5>
+                                <h6>Option 2: {this.props.totalVotesOpt2} Voted</h6>
                                 <div
                                 className="progress-bar"
                                 role="progressbar"
@@ -127,8 +124,9 @@ class PollDetail extends Component {
                                 </div>
                             </div>
                             <span>Total number of votes: {this.props.totalVotes}</span>
-                        </div>
-                    )}
+                        </div>)
+                    }
+                    
                 </div>
             </div>
         )

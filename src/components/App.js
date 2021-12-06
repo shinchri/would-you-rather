@@ -5,7 +5,7 @@ import Login from './Login'
 import Nav from './Nav'
 import Home from './Home'
 import Fragment from 'render-fragment'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import PollDetail from './PollDetail'
 
 class App extends Component {
@@ -14,23 +14,25 @@ class App extends Component {
   }
 
   render() {
-
+    console.log("**", this.props.loading)
     return (
       <Router>
         <Fragment>
           <div className='container'>
             {this.props.loading === true
-            ? null
+            ? <Route path='/' component={Login} />
             : <div>
-                <Route path='/login' component={Login} />
-                <Route path='/' exact >
+                <Switch>
+                  <Route path='/home' exact >
+                    <Nav />
+                    <Home />
+                  </Route>
+                  <Route path='/questions/:question_id' >
                   <Nav />
-                  <Home />
-                </Route>
-                <Route path='/questions/:question_id' >
-                  <Nav />
-                  <PollDetail />
-                </Route>
+                    <PollDetail />
+                  </Route>
+                  <Redirect exact from='/' to='/home' />
+                </Switch>
               </div>
             }
           </div>
@@ -40,9 +42,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({users, questions}) {
+function mapStateToProps({authedUser}) {
   return {
-    loading: Object.keys(users).length === 0 || Object.keys(questions).length === 0
+    loading: authedUser === null
   }
 }
 

@@ -9,8 +9,7 @@ class Home extends Component {
     render() {
         const { authedUser } = this.props
         if (authedUser === null) {
-            console.log('To login page');
-            return <Redirect to='/login' />
+            return <Redirect to='/' />
         }
         
         return (

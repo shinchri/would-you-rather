@@ -21,20 +21,21 @@ class Login extends Component {
 
         const { userId } = this.state
 
-        this.props.dispatch(setAuthedUser(userId))
-
         this.setState(() => ({
             toHome: true
         }))
+
+        this.props.dispatch(setAuthedUser(userId))
+
+        
     }
 
     render () {
         const { toHome } = this.state
         const { users} = this.props
-
+        console.log(toHome)
         if (toHome === true) {
-            console.log('Redirect to home.')
-            return <Redirect to='/' />
+            return <Redirect to='/home' />
         }
 
         return (
@@ -54,9 +55,10 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps ({users}) {
+function mapStateToProps ({authedUser, users}) {
     return {
-        users: Object.values(users)
+        users: Object.values(users),
+        authedUser
     }
 }
 

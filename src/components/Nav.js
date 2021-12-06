@@ -1,16 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect, NavLink } from 'react-router-dom'
 
 class Nav extends React.Component {
     render() {
-        const { authedUser, user } = this.props
-        console.log(authedUser)
-        console.log(user)
+        const { user, authedUser } = this.props
+
+        if (authedUser === null) {
+            return <Redirect to='/' />
+        }
         return (
             <nav className='nav'>
                 <ul>
                     <li>
-                        Home
+                        <NavLink to="/home" activeClassName="active">
+                            Home
+                        </NavLink>
                     </li>
                     <li>
                         New Question
@@ -33,8 +38,8 @@ class Nav extends React.Component {
 function mapStateToProps({authedUser, users}) {
 
     return {
-        authedUser: "tylermcginnis",
-        user: Object.values(users).filter((user) => user.id === "tylermcginnis")
+        authedUser,
+        user: Object.values(users).filter((user) => user.id === authedUser) || null
     }
 }
 

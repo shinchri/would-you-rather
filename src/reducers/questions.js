@@ -1,6 +1,7 @@
 import {
-    RECEIVE_QUESTIONS, ADD_QUESTION, ADD_USER_ANSWER 
+    RECEIVE_QUESTIONS, ADD_QUESTION
 } from '../actions/questions'
+import { ADD_USER_ANSWER } from '../actions/users'
 
 export default function questions(state={}, action) {
     switch(action.type) {
