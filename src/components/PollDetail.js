@@ -1,132 +1,38 @@
 import React, { Component} from "react";
 import { connect } from "react-redux";
-import Poll from "./Poll";
-import { handleAddUserAnswerToQuestion } from '../actions/questions'
 import { withRouter } from 'react-router-dom'
+import Progress from './Progress'
+import Question from './Question'
 
 class PollDetail extends Component {
-
-    state = {
-        optionSelected: ''
-    }
-
-    handleChanges = (e) => {
-        this.setState({
-            optionSelected: e.target.value
-        });
-    };
-
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-        this.props.dispatch(
-            handleAddUserAnswerToQuestion(this.props.questionId, this.state.optionSelected)
-        );
-        this.setState({
-            optionSelected: ''
-        })
-    }
-
-    checkSelectedOption() {
-        if (
-          this.props.hasAnswered &&
-          this.props.question.optionOne.votes.includes(this.props.authedUser)
-        ) {
-          document.getElementById("optionOne").checked = true;
-        } else if (
-          this.props.hasAnswered &&
-          this.props.question.optionTwo.votes.includes(this.props.authedUser)
-        ) {
-          document.getElementById("optionTwo").checked = true;
-        }
-      }
-    
-      componentDidMount() {
-        this.checkSelectedOption();
-      }
-    
-      componentDidUpdate(prevProps) {
-        if (this.props.hasAnswered !== prevProps.hasAnswered) {
-          this.checkSelectedOption();
-        }
-      }
-
-
 
     render() {
         return (
             <div>
-                <h2 className="text-center">Poll Details</h2>
                 <div className="add-question-container border">
                     
-                    <Poll questionId={this.props.questionId} />
                     {!this.props.hasAnswerd
-                    ?   (
-                    
-                        <form onSubmit={this.handleSubmit} className="p-20">
-                            <div className="custom-control custom-radio">
-                                <input
-                                    type="radio"
-                                    name="optradio"
-                                    onChange={this.handleChanges}
-                                    disabled={this.props.hasAnswered}
-                                    id="optionOne"
-                                    value="optionOne"
-                                    className="custom-control-input"
-                                />
-                                <label className="custom-control-label" htmlFor="optionOne">
-                                    {this.props.question.optionOne.text}
-                                </label>
-                            </div>
-                            <div className="custom-control custom-radio">
-                                <input
-                                    type="radio"
-                                    name="optradio"
-                                    value="optionTwo"
-                                    id="optionTwo"
-                                    onChange={this.handleChanges}
-                                    disabled={this.props.hasAnswered}
-                                    className="custom-control-input"
-                                />
-                                <label className="custom-control-label" htmlFor="optionTwo">
-                                    {this.props.question.optionTwo.text}
-                                </label>
-                            </div>
-                            {!this.props.hasAnswered && (
-                                <div>
-                                    <button
-                                        disabled={this.state.optionSelected === ""}
-                                        type="submit"
-                                        className="btn btn-primary"
-                                    >
-                                        Submit
-                                    </button>
-                                </div>
-                            )}
-                        </form>)
+                    ?   (<Question questionId={this.props.questionId}/>)
                     :   (<div className="">
-                            <div className="progress">
-                                <h6>Option 1: {this.props.totalVotesOpt1} Voted</h6>
-                                <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: `${this.props.percentage1}%` }}
-                                >
-                                {this.props.percentage1}%
-                                </div>
-                                <h6>Option 2: {this.props.totalVotesOpt2} Voted</h6>
-                                <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: `${this.props.percentage2}%` }}
-                                >
-                                {this.props.percentage2}%
-                                </div>
+                            <h3>Results:</h3>
+                            <div>
+                                <Progress 
+                                    option_number={1}
+                                    question={this.props.question} 
+                                    option={this.props.totalVotesOpt1} 
+                                    percentage={this.props.percentage1} 
+                                    totalVotes = {this.props.totalVotes}
+                                />
+                                <Progress
+                                    option_number={2} 
+                                    question={this.props.question} 
+                                    option={this.props.totalVotesOpt2} 
+                                    percentage={this.props.percentage2} 
+                                    totalVotes = {this.props.totalVotes}
+                                />
                             </div>
-                            <span>Total number of votes: {this.props.totalVotes}</span>
                         </div>)
                     }
-                    
                 </div>
             </div>
         )

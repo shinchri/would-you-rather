@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 class NewQuestion extends Component {
 
@@ -46,13 +48,14 @@ class NewQuestion extends Component {
                 
                 <h3>Create New Question</h3>
                 <span>Complete the question:</span>
-                <form onSubmit={this.handleAddQuestion} >
-                    <span>Would you rather...</span>
-                    <input type='text' id="optionOne" onChange={this.handleChange}/>
+
+                <Form onSubmit={this.handleAddQuestion}>
+                    <Form.Control type='text' placeholder="Enter Option One Text Here" id="optionOne" onChange={this.handleChange}/>
                     <span> - OR - </span>
-                    <input type='text' id="optionTwo" onChange={this.handleChange}/>
-                    <button disabled={!this.state.optionOne || !this.state.optionTwo}>Submit</button>
-                </form>
+                    <Form.Control type='text' placeholder="Enter Option Two Text Here" id="optionTwo" onChange={this.handleChange}/>
+                    <Button className="new-question-button" type='submit' variant="primary" disabled={!this.state.optionOne || !this.state.optionTwo}>Submit</Button>
+                    
+                </Form>
             </div>
         )
     }

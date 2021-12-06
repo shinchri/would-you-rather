@@ -23,8 +23,7 @@ class Navs extends React.Component {
         }
         return (
             <Navbar collapseOnSelect expand="lg" variant="light" style={{padding: '20px'}}>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <span className='user-greeting'>Hello, {user[0].name}</span>
+                
                 
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -45,6 +44,7 @@ class Navs extends React.Component {
                     </Nav>
                     
                 </Navbar.Collapse>
+                <span className='user-greeting'>Hello, {user[0].name}</span>
                 <Button onClick={this.handleLogout} variant="outline-dark">Logout</Button>
                 
             </Navbar>
