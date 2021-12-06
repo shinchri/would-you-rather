@@ -7,14 +7,16 @@ import Home from './Home'
 import Fragment from 'render-fragment'
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import PollDetail from './PollDetail'
+import NewQuestion from './NewQuestion'
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
 
+  // Check this out if you want the data to persist on reload
+  // https://www.npmjs.com/package/redux-persist
   render() {
-    console.log("**", this.props.loading)
     return (
       <Router>
         <Fragment>
@@ -27,8 +29,12 @@ class App extends Component {
                     <Nav />
                     <Home />
                   </Route>
+                  <Route path='/question/new'>
+                    <Nav />
+                    <NewQuestion />
+                  </Route>
                   <Route path='/questions/:question_id' >
-                  <Nav />
+                    <Nav />
                     <PollDetail />
                   </Route>
                   <Redirect exact from='/' to='/home' />

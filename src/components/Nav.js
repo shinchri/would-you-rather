@@ -27,7 +27,10 @@ class Nav extends React.Component {
                         </NavLink>
                     </li>
                     <li>
-                        New Question
+                        <NavLink to="/question/new" activeClassName="active">
+                            New Question
+                        </NavLink>
+                        
                     </li>
                     <li>
                         Leaderboard
