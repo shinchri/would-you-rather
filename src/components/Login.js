@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Redirect } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 class Login extends Component {
 
@@ -19,13 +21,17 @@ class Login extends Component {
     handleLogin = (e) => {
         e.preventDefault()
 
-        const { userId } = this.state
+        if (e.target.value === "undefined"){
+            console.log(e.target.value)
+            const { userId } = this.state
 
-        this.setState(() => ({
-            toHome: true
-        }))
+            this.setState(() => ({
+                toHome: true
+            }))
 
-        this.props.dispatch(setAuthedUser(userId))
+            this.props.dispatch(setAuthedUser(userId))
+        }
+        
 
         
     }
@@ -33,23 +39,23 @@ class Login extends Component {
     render () {
         const { toHome } = this.state
         const { users} = this.props
-        console.log(toHome)
         if (toHome === true) {
             return <Redirect to='/home' />
         }
 
         return (
             <div>
-                <form onSubmit={this.handleLogin}>
-                    <span >Sign in</span>
-                    <select onChange={(e) => this.handleChange(e.target.value)} required>
-                        <option value="" defaultValue={{label: "Select Your Option", value: 0}}>Select your option</option>
+                <h1 className="signin-heading">Sign in</h1>
+                <Form onSubmit={this.handleLogin} className="login-form">
+                    <Form.Control as="select" aria-label="User Select" onChange={(e) => this.handleChange(e.target.value)} value={-1}>
+                        <option disabled key="blankChoice" value={-1}>Select User</option>
                         {users.map((user) => (
-                        <option key={user.id} value={user.id}>{user.name}</option>
+                            <option key={user.id} value={user.id}>{user.name}</option>
                         ))}
-                    </select>
-                    <button type='submit'>Sign in</button>
-                </form>
+                    </Form.Control>
+                    <Button type="submit" variant="primary" disabled={this.state.userId ===''}>Sign In</Button>
+                    
+                </Form>
             </div>
         )
     }

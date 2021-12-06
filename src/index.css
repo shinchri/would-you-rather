@@ -48,3 +48,11 @@ li {
   margin-right: 50px;
   margin-left: 25px
 }
+
+.login-form button {
+  margin-top: 10px;
+}
+
+.signin-heading {
+  margin-top: 20px;
+}
