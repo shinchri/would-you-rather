@@ -24,7 +24,7 @@ class Navs extends React.Component {
         return (
             <Navbar collapseOnSelect expand="lg" variant="light" style={{padding: '20px'}}>
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <span class='user-greeting'>Hello, {user[0].name}</span>
+                <span className='user-greeting'>Hello, {user[0].name}</span>
                 
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -39,7 +39,7 @@ class Navs extends React.Component {
                         <NavLink to="/question/new" activeClassName="active" className="nav-item">
                             New Question
                         </NavLink>
-                        <NavLink to="/question/new" activeClassName="active" className="nav-item">
+                        <NavLink to="/score" activeClassName="active" className="nav-item">
                             Leader Board
                         </NavLink>
                     </Nav>

@@ -8,6 +8,7 @@ import Fragment from 'render-fragment'
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import PollDetail from './PollDetail'
 import NewQuestion from './NewQuestion'
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +37,10 @@ class App extends Component {
                   <Route path='/questions/:question_id' >
                     <Navs />
                     <PollDetail />
+                  </Route>
+                  <Route path='/score'>
+                    <Navs />
+                    <LeaderBoard />
                   </Route>
                   <Redirect exact from='/' to='/home' />
                 </Switch>
