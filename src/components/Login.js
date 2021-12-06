@@ -20,25 +20,21 @@ class Login extends Component {
 
     handleLogin = (e) => {
         e.preventDefault()
-
-        if (e.target.value === "undefined"){
-            console.log(e.target.value)
-            const { userId } = this.state
-
-            this.setState(() => ({
-                toHome: true
-            }))
-
-            this.props.dispatch(setAuthedUser(userId))
-        }
         
+        const { userId } = this.state
 
-        
+        this.setState(() => ({
+            toHome: true
+        }))
+
+        this.props.dispatch(setAuthedUser(userId))
+               
     }
 
     render () {
         const { toHome } = this.state
         const { users} = this.props
+
         if (toHome === true) {
             return <Redirect to='/home' />
         }
@@ -47,13 +43,13 @@ class Login extends Component {
             <div>
                 <h1 className="signin-heading">Sign in</h1>
                 <Form onSubmit={this.handleLogin} className="login-form">
-                    <Form.Control as="select" aria-label="User Select" onChange={(e) => this.handleChange(e.target.value)} value={-1}>
-                        <option disabled key="blankChoice" value={-1}>Select User</option>
+                    <Form.Control as="select" aria-label="User Select" onChange={(e) => this.handleChange(e.target.value)}>
+                        <option key="blankChoice" value=''>Select User</option>
                         {users.map((user) => (
                             <option key={user.id} value={user.id}>{user.name}</option>
                         ))}
                     </Form.Control>
-                    <Button type="submit" variant="primary" disabled={this.state.userId ===''}>Sign In</Button>
+                    <Button type="submit" variant="primary" disabled={this.state.userId === ''}>Sign In</Button>
                     
                 </Form>
             </div>
