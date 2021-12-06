@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ScoreCard from './ScoreCard'
+import Row from 'react-bootstrap/Row'
 
 class LeaderBoard extends Component {
 
     render() {
         const { users, userIds} = this.props
-        console.log(this.props.users)
         return (
             <div>
+                <Row xs={1} md={1} className="g-4">
                 {userIds.map((id) => (
                     <ScoreCard
                         key={id} 
-                        user-name={users[id].name}
-                        user-question={Object.keys(users[id].questions).length}
-                        user-answer={Object.keys(users[id].answers).length}
+                        user_name={users[id].name}
+                        user_question={Object.keys(users[id].questions).length}
+                        user_answer={Object.keys(users[id].answers).length}
                         score={Object.keys(users[id].questions).length + Object.keys(users[id].answers).length}
                     />
                 ))}
+                </Row>
             </div>
         )
     }
