@@ -13,20 +13,22 @@ class Home extends Component {
         }
         
         return (
-            <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example">
-                <Tab eventKey="unanswered" title="Unanswered">
-                    <PollList
-                    title="Unanswered Questions"
-                    questionIds={this.props.unanswered}
-                    />
-                </Tab>
-                <Tab eventKey="answered" title="Answered">
-                    <PollList
-                    title="Answered Questions"
-                    questionIds={this.props.answered}
-                    />
-                </Tab>
-            </Tabs>
+            <div className="border">
+                <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example">
+                    <Tab eventKey="unanswered" title="Unanswered">
+                        <PollList
+                        title="Unanswered Questions"
+                        questionIds={this.props.unanswered}
+                        />
+                    </Tab>
+                    <Tab eventKey="answered" title="Answered">
+                        <PollList
+                        title="Answered Questions"
+                        questionIds={this.props.answered}
+                        />
+                    </Tab>
+                </Tabs>
+            </div>
         )
     }
 }

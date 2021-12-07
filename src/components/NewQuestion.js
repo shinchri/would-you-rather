@@ -44,7 +44,7 @@ class NewQuestion extends Component {
             return <Redirect to='/home' />
         }
         return (
-            <div>
+            <div className="border">
                 
                 <h3>Create New Question</h3>
                 <span>Complete the question:</span>

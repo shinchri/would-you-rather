@@ -44,7 +44,10 @@ class Navs extends React.Component {
                     </Nav>
                     
                 </Navbar.Collapse>
-                <span className='user-greeting'>Hello, {user[0].name}</span>
+                <span className='user-greeting'>
+                    Hello, {user[0].name}
+                    <img src={user[0].avatarURL} alt={user[0].name} className="avatar"/>
+                    </span>
                 <Button onClick={this.handleLogout} variant="outline-dark">Logout</Button>
                 
             </Navbar>

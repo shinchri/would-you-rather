@@ -9,11 +9,19 @@ class PollDetail extends Component {
     render() {
         return (
             <div>
-                <div className="add-question-container border">
+                <div className="add-question-container">
                     
                     {!this.props.hasAnswerd
                     ?   (<Question questionId={this.props.questionId}/>)
                     :   (<div className="">
+                            <div className="row poll-detail-name">
+                                <h4>
+                                    <img src={this.props.avatar} alt={this.props.name} className="avatar"/>
+                                    Asked by {this.props.user.name}
+                                </h4>
+                                
+                            </div>
+                            
                             <h3>Results:</h3>
                             <div>
                                 <Progress 
@@ -50,7 +58,8 @@ function mapStateToProps({questions, authedUser, users}, props) {
     const question = questions[questionId]
     const totalVotesOpt1 = question.optionOne.votes.length;
     const totalVotesOpt2 = question.optionTwo.votes.length;
-    const totalVotes = totalVotesOpt1 + totalVotesOpt2
+    const totalVotes = totalVotesOpt1 + totalVotesOpt2;
+    const author = users[question.author]
 
     return {
         authedUser,
@@ -62,7 +71,9 @@ function mapStateToProps({questions, authedUser, users}, props) {
         hasAnswerd: Object.keys(user.answers).includes(questionId),
         percentage1: calculatePercentageForOption(question.optionOne, totalVotes),
         percentage2: calculatePercentageForOption(question.optionTwo, totalVotes),
-        user
+        user,
+        avatar: author.avatarURL,
+        name: author.name
     }
 }
 

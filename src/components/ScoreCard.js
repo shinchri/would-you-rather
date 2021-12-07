@@ -9,7 +9,8 @@ class ScoreCard extends Component {
             user_name, 
             user_question, 
             user_answer, 
-            score
+            score,
+            avatar
         } = this.props
         
         return (
@@ -17,7 +18,10 @@ class ScoreCard extends Component {
                 <Card border='success'>
                     <Card.Img variant='top' src="" />
                     <Card.Body>
-                        <Card.Title>{user_name}</Card.Title>
+                        <Card.Title>
+                            <img src={avatar} alt={user_name} className="avatar" />
+                            {user_name}
+                        </Card.Title>
                         <Row xs={2} md={2} className="g-4">
                             <Card.Body>
                                 <Card.Text>

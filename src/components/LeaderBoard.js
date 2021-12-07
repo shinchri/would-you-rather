@@ -17,6 +17,7 @@ class LeaderBoard extends Component {
                         user_question={Object.keys(users[id].questions).length}
                         user_answer={Object.keys(users[id].answers).length}
                         score={Object.keys(users[id].questions).length + Object.keys(users[id].answers).length}
+                        avatar={users[id].avatarURL}
                     />
                 ))}
                 </Row>
@@ -32,6 +33,8 @@ function mapStateToProps({users}) {
         const user1 = Object.keys(users[a].answers).length + Object.keys(users[a].questions).length
         return user2 - user1
     })
+
+
     return {
         users,
         userIds

@@ -54,6 +54,12 @@ class Question extends Component {
     render() {
         return (
             <div>
+                <div className="row poll-detail-name">
+                    <h4>
+                        <img src={this.props.avatar} alt={this.props.name} className="avatar"/>
+                        Asked by {this.props.name}
+                    </h4>
+                </div>
                 <Form onSubmit={this.handleSubmit}>
                     <h3>Would you rather...</h3>
                     <Form.Check type="radio" name="group1" id="optionOne" value="optionOne" label={this.props.question.optionOne.text} onChange={this.handleChanges}/>
@@ -69,12 +75,15 @@ function mapStateToProps({authedUser, questions, users}, props) {
     const questionId = props.questionId
     const user = users[authedUser]
     const question = questions[questionId]
+    const author = users[question.author]
 
     return {
         questionId,
         user,
         question,
-        hasAnswered: Object.keys(user.answers).includes(questionId)
+        hasAnswered: Object.keys(user.answers).includes(questionId),
+        name: author.name,
+        avatar: author.avatarURL
     }
 }
 
