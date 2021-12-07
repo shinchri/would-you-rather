@@ -7,16 +7,27 @@ class Poll extends Component {
     render() {
         
         return (
-            <Link to={`/questions/${this.props.questionId}`} >
-                <div className="poll-info">
-                    <span className="name">{this.props.name}</span>
-                    <span className="time">{this.props.timestamp}</span>
-                    <span className="question">Would you rather...?</span>
-                    <span className="option">{this.props.question.optionOne.text}</span>
-                    <span>OR</span>
-                    <span className="option">{this.props.question.optionTwo.text}</span>
+            
+            <div className="poll-info">
+                <div className="row">
+                    <div className="col">
+                        <h4 className="name">{this.props.name} asks:</h4>
+                    </div>
                 </div>
-            </Link>
+                <div className='row'>
+                    <div className="col">
+                        <img src={this.props.avatar} alt={this.props.name} className="avatar"/>
+                    </div>
+                    <div className = "col-6" >
+                        <h5 className="question">Would you rather...?</h5>
+                        <div className="option"><b>{this.props.question.optionOne.text}</b> or <b>{this.props.question.optionTwo.text}</b></div>
+                        <Link to={`/questions/${this.props.questionId}`} className="poll-button">View Poll</Link>
+                    </div>
+                </div>
+                
+
+                
+            </div>
         )
     }
 }
