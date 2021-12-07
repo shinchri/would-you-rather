@@ -35,10 +35,10 @@ class Navs extends React.Component {
                         <NavLink to="/home" activeClassName="active" className="nav-item">
                             Home
                         </NavLink>
-                        <NavLink to="/question/new" activeClassName="active" className="nav-item">
+                        <NavLink to="/question/add" activeClassName="active" className="nav-item">
                             New Question
                         </NavLink>
-                        <NavLink to="/score" activeClassName="active" className="nav-item">
+                        <NavLink to="/leaderboard" activeClassName="active" className="nav-item">
                             Leader Board
                         </NavLink>
                     </Nav>

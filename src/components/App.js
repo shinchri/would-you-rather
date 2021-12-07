@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 import PollDetail from './PollDetail'
 import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
+import PageNotFound from './PageNotFound'
 
 class App extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class App extends Component {
                     <Navs />
                     <Home />
                   </Route>
-                  <Route path='/question/new'>
+                  <Route path='/question/add'>
                     <Navs />
                     <NewQuestion />
                   </Route>
@@ -38,10 +39,11 @@ class App extends Component {
                     <Navs />
                     <PollDetail />
                   </Route>
-                  <Route path='/score'>
+                  <Route path='/leaderboard'>
                     <Navs />
                     <LeaderBoard />
                   </Route>
+                  <Route path='/404' component={PageNotFound} />
                   <Redirect exact from='/' to='/home' />
                 </Switch>
               </div>

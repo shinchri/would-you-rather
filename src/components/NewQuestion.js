@@ -47,7 +47,7 @@ class NewQuestion extends Component {
             <div className="border">
                 
                 <h3>Create New Question</h3>
-                <span>Complete the question:</span>
+                <span>Would you rather...</span>
 
                 <Form onSubmit={this.handleAddQuestion}>
                     <Form.Control type='text' placeholder="Enter Option One Text Here" id="optionOne" onChange={this.handleChange}/>

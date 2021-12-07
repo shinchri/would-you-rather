@@ -72,18 +72,21 @@ li {
   border-radius: 5px;
 }
 
- a.poll-button:hover {
+a.poll-button:hover {
   background-color: black;
   color: white;
-  
-  }
+}
 
-  .avatar {
-    height: 50px;
-    border-radius: 25px;
-    margin: 10px;
-  }
+.avatar {
+  height: 50px;
+  border-radius: 25px;
+  margin: 10px;
+}
 
-  .poll-detail-name {
-    background-color: lightgrey;
-  }
+.poll-detail-name {
+  background-color: lightgrey;
+}
+
+.select {
+  color: red;
+}
